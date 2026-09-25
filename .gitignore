@@ -1,0 +1,21 @@
+# Ambiente Virtual 
+.venv/
+venv/ 
+
+# Cache Python 
+__pycache__/
+* .pyc
+.pytest_cache/
+
+# Vercel 
+.vercel/
+
+# Arquivos de saída gerados localmente durante testes manuais 
+saida/
+* .xlsx
+!tests/fixtures/*.xlsx
+
+# Sistema Operacional / editor 
+.DS_Store
+.vscode/* 
+!.vscode/settings.json

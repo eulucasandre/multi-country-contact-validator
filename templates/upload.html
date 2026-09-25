@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Cleaner 🧹</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1>Table Cleaner </h1>
+        <p class="subtitulo">Envie sua planilha de contatos (.csv ou .xlsx) e receba de volta os dados limpos e validados.</p>
+
+        {% with mensagens = get_flashed_messages() %}
+            {% if mensagens %}
+                <div class="alerta">
+                    {% for mensagem in mensagens %}
+                        <p>{{ mensagem }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('processar') }}" method="post" enctype="multipart/form-data">
+            <label for="arquivo">Planilha de contatos</label>
+            <input type="file" id="arquivo" name="arquivo" accept=".csv,.xlsx,.xls" required>
+            <button type="submit">Processar e baixar</button>
+        </form>
+
+        <section class="info">
+            <h2>O que este processo faz</h2>
+            <ul>
+                <li><strong>Nome</strong> e <strong>Telefone</strong> são obrigatórios — linhas sem eles são rejeitadas.</li>
+                <li><strong>Telefone</strong> é validado e formatado automaticamente para qualquer país (padrão internacional E.164).</li>
+                <li><strong>Email</strong> e <strong>Data de nascimento</strong> são opcionais, mas validados se presentes.</li>
+                <li>O download é um <strong>.zip</strong> com os dados limpos, as linhas rejeitadas (se houver) e um relatório.</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
