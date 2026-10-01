@@ -54,11 +54,13 @@ def processar():
         caminho_zip = pasta_temp / 'resultado.zip'
         with zipfile.ZipFile(caminho_zip, 'w') as zipf:
             zipf.write(resultado['caminho_aceitos'], arcname='dados_limpos.xlsx')
+            zipf.write(resultado['caminho_aceitos_csv'], arcname='dados_limpos.csv')
 
             if resultado['caminho_rejeitados']:
                 zipf.write(resultado['caminho_rejeitados'], arcname='dados_rejeitados.xlsx')
+                zipf.write(resultado['caminho_rejeitados_csv'], arcname='dados_rejeitados.csv')
 
-            zipf.writestr('relatorio.txt', resultado['relatorio_texto'])   
+            zipf.writestr('relatorio.txt', resultado['relatorio_texto']) 
 
         with open(caminho_zip, 'rb') as f:
             dados_zip = f.read()

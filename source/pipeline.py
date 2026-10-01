@@ -45,10 +45,19 @@ def processar_arquivo(caminho_arquivo: Path, pasta_saida: Path) -> dict:
     caminhos_aceitos = pasta_saida / 'dados_limpos.xlsx'
     df_aceitos.to_excel(caminhos_aceitos, index=False)
 
+
+    caminhos_aceitos_csv = pasta_saida / 'dados_limpos.csv'
+    df_aceitos.to_csv(caminhos_aceitos_csv, index=False, encoding='utf-8-sig')
+
     caminhos_rejeitados = None
+    caminhos_rejeitados_csv = None
+
     if not df_rejeitados.empty:
         caminhos_rejeitados = pasta_saida / 'linhas_rejeitadas.xlsx'
         df_rejeitados.to_excel(caminhos_rejeitados, index=False)
+
+        caminhos_rejeitados_csv = pasta_saida / 'linhas_rejeitadas.csv'
+        df_rejeitados.to_csv(caminhos_rejeitados_csv, index=False, encoding='utf-8-sig')
 
 # ---- 4. Relatório ------------------
     relatorio_texto = formatar_relatorio_texto(relatorio, nome_arquivo=caminho_entrada.name)
@@ -58,5 +67,7 @@ def processar_arquivo(caminho_arquivo: Path, pasta_saida: Path) -> dict:
         'relatorio': relatorio,
         'relatorio_texto': relatorio_texto,
         'caminho_aceitos': str(caminhos_aceitos),
+        'caminho_aceitos_csv': str(caminhos_aceitos_csv),
         'caminho_rejeitados': str(caminhos_rejeitados) if caminhos_rejeitados else None,
+        'caminho_rejeitados_csv': str(caminhos_rejeitados_csv) if caminhos_rejeitados_csv else None,
     }
