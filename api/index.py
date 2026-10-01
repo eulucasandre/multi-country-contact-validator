@@ -9,11 +9,13 @@ from flask import Flask, render_template, request, send_file, flash, redirect, u
 
 from source.pipeline import processar_arquivo, ErroProcessamento
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 app = Flask(
     __name__,
-    template_folder='../templates',
-    static_folder='../static',
-    )
+    template_folder=str(BASE_DIR / "templates"),
+    static_folder=str(BASE_DIR / "static"),
+)
 app.secret_key = 'troque-sua-chave-em-producao'
 
 EXTENSOES_PERMITIDAS = {'.xlsx', '.xls', '.csv'}

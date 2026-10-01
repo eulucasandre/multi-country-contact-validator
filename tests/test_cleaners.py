@@ -123,7 +123,7 @@ class TestLimparDados:
         assert relatorio["total_processado"] == 3
         assert relatorio["aceitos"] == 2
         assert relatorio["rejeitados"] == 1
-        assert relatorio["motivos_rejeicao"] == {"telefone vazio": 1}
+        assert relatorio["motivos_rejeicao"] == {"Telefone vazio": 1}
 
         # Telefone precisa estar formatado em E.164 na saída
         assert aceitos.iloc[0]["Telefone"] == "+5586999999999"
@@ -140,10 +140,10 @@ class TestLimparDados:
         assert len(rejeitados) == 1
         motivo = rejeitados.iloc[0]["Motivo_Rejeicao"]
         # Os 3 motivos precisam estar concatenados na mesma linha, com "; "
-        assert "nome vazio" in motivo
-        assert "telefone vazio" in motivo
-        assert "email em formato inválido" in motivo
-        assert relatorio["motivos_rejeicao"]["nome vazio"] == 1
+        assert "Nome vazio" in motivo
+        assert "Telefone vazio" in motivo
+        assert "E-mail em formato inválido" in motivo
+        assert relatorio["motivos_rejeicao"]["Nome vazio"] == 1
 
     def test_colunas_opcionais_ausentes_nao_quebram_o_processo(self):
         """Planilha só com Nome e Telefone (sem Email/Data) deve funcionar normalmente."""
